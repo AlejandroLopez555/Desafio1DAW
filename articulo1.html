@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitio Web con Estructura de Artículos</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Encabezado -->
+        <header class="header">
+            <div class="header-content">
+                <h1>Encabezado</h1>
+                <p>(img de fondo)</p>
+            </div>
+        </header>
+
+        <!-- Layout principal -->
+        <div class="main-layout">
+            <!-- Artículo principal -->
+            <article class="main-article" onclick="expandArticle(this)">
+                <div class="article-header">
+                    <h2 class="article-title">Título del artículo 1</h2>
+                </div>
+                <div class="article-content">
+                    <div class="article-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ba5d54a4-3719-4e70-ae71-12ce794b8e2c.png" alt="Modern technology workspace with computers, monitors, and digital interfaces showcasing innovation and productivity" />
+                    </div>
+                    <div class="article-text">
+                        <p style="margin-bottom: 10px; color: #666; font-size: 0.9em;">Texto del artículo 1</p>
+                        <div class="text-lines">
+                            <div class="text-line"></div>
+                            <div class="text-line"></div>
+                            <div class="text-line"></div>
+                            <div class="text-line"></div>
+                            <div class="text-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <article class="sidebar-article" onclick="expandArticle(this)">
+                    <div class="sidebar-header">
+                        Ir a inicio
+                    </div>
+                    <div class="sidebar-content">
+                        <div class="sidebar-image">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3d1487a5-b3b7-4fc1-bc6b-5a9f6f6967df.png" alt="Clean and modern website homepage design with navigation menu and welcoming layout" />
+                        </div>
+                        <div class="sidebar-text">
+                            <div class="sidebar-text-line"></div>
+                            <div class="sidebar-text-line"></div>
+                            <div class="sidebar-text-line"></div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="sidebar-article" onclick="expandArticle(this)">
+                    <div class="sidebar-header">
+                        Img artículo 2
+                    </div>
+                    <div class="sidebar-content">
+                        <div class="sidebar-image">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/997332dc-8f70-4692-8c12-3fd4a07f81a9.png" alt="Professional business meeting with people discussing charts and graphs in a modern office environment" />
+                        </div>
+                        <div class="sidebar-text">
+                            <div class="sidebar-text-line"></div>
+                            <div class="sidebar-text-line"></div>
+                            <div class="sidebar-text-line"></div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="sidebar-article" onclick="expandArticle(this)">
+                    <div class="sidebar-header">
+                        Img artículo 3
+                    </div>
+                    <div class="sidebar-content">
+                        <div class="sidebar-image">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a18d2866-01d1-4a92-a902-943ca80f4729.png" alt="Creative design studio with artistic tools, color palettes, and inspirational workspace for digital content creation" />
+                        </div>
+                        <div class="sidebar-text">
+                            <div class="sidebar-text-line"></div>
+                            <div class="sidebar-text-line"></div>
+                            <div class="sidebar-text-line"></div>
+                        </div>
+                    </div>
+                </article>
+            </aside>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                pie de página
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Función para expandir artículos
+        function expandArticle(element) {
+            // Remover clase activa de todos los artículos
+            const allArticles = document.querySelectorAll('.main-article, .sidebar-article');
+            allArticles.forEach(article => {
+                article.style.transform = '';
+                article.style.zIndex = '';
+            });
+
+            // Agregar efecto al artículo clickeado
+            element.style.transform = 'scale(1.02)';
+            element.style.zIndex = '10';
+            
+            // Efecto de pulso
+            element.style.animation = 'none';
+            setTimeout(() => {
+                element.style.animation = 'pulse 0.6s ease';
+            }, 10);
+
+            // Mostrar información del artículo
+            const title = element.querySelector('.article-title, .sidebar-header').textContent;
+            console.log(`Artículo clickeado: ${title}`);
+            
+            // Simular navegación (aquí podrías agregar navegación real)
+            setTimeout(() => {
+                alert(`Navegando a: ${title}`);
+            }, 300);
+        }
+
+        // Agregar animación de pulso
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1.02); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1.02); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Efecto parallax en el header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.header');
+            const rate = scrolled * -0.5;
+            header.style.backgroundPosition = `center ${rate}px`;
+        });
+
+        // Animación de carga
+        window.addEventListener('load', () => {
+            const articles = document.querySelectorAll('.main-article, .sidebar-article');
+            articles.forEach((article, index) => {
+                setTimeout(() => {
+                    article.style.opacity = '1';
+                    article.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // Inicializar artículos con opacidad 0
+        document.addEventListener('DOMContentLoaded', () => {
+            const articles = document.querySelectorAll('.main-article, .sidebar-article');
+            articles.forEach(article => {
+                article.style.opacity = '0';
+                article.style.transform = 'translateY(30px)';
+                article.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+        });
+    </script>
+</body>
+</html>
+
