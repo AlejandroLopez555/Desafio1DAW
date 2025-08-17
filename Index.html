@@ -5,13 +5,379 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DB Games</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/article.css">
-    
+    <style>
+        /* Reset y estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f1923;
+            color: #fff;
+            background-image: 
+                linear-gradient(rgba(15, 25, 35, 0.9), rgba(15, 25, 35, 0.9)),
+                url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        /* Header ajustado al 100% del ancho */
+        .header-container {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 2;
+        }
+
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 3;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .header-content h1 {
+            font-size: 4rem;
+            margin: 0;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.5);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .header-content p {
+            font-size: 1.5rem;
+            margin: 10px 0 0;
+            color: #ccc;
+        }
+
+        /* Contenedor principal */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Estilos del contenido principal */
+        .main-content {
+            padding: 20px 0;
+        }
+
+        h1, h2, h3 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+
+        hr {
+            border: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #00ffff, transparent);
+            margin: 30px 0;
+        }
+
+        /* Estilos de la tabla de juegos */
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: separate;
+            border-spacing: 15px;
+        }
+
+        td {
+            background: rgba(20, 30, 40, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        td:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+        }
+
+        td img {
+            border-radius: 8px;
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        td:hover img {
+            transform: scale(1.05);
+        }
+
+        button {
+            background: linear-gradient(45deg, #00ffff, #0088ff);
+            border: none;
+            color: #0f1923;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #0088ff, #00ffff);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+
+        /* Artículos en horizontal */
+        .articles-horizontal {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #00ffff #0f1923;
+        }
+
+        .articles-horizontal::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .articles-horizontal::-webkit-scrollbar-track {
+            background: #0f1923;
+            border-radius: 10px;
+        }
+
+        .articles-horizontal::-webkit-scrollbar-thumb {
+            background-color: #00ffff;
+            border-radius: 10px;
+        }
+
+        .article-card {
+            flex: 0 0 300px;
+            background: rgba(20, 30, 40, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+        }
+
+        .article-image {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.1);
+        }
+
+        .article-content {
+            padding: 15px;
+        }
+
+        .article-content h2 {
+            margin: 0 0 10px 0;
+            color: #00ffff;
+            font-size: 1.2rem;
+        }
+
+        .article-content p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #ccc;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Estilos de la tabla de ventas */
+        .Ventas {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: rgba(20, 30, 40, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .Ventas th, .Ventas td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .Ventas th {
+            background: rgba(0, 150, 200, 0.3);
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .Ventas tr:hover {
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        /* Estilos del pie de página */
+        .footer {
+            background: rgba(10, 20, 30, 0.9);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 50px;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .footer svg {
+            fill: #00ffff;
+            margin: 0 10px;
+            width: 24px;
+            height: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .footer svg:hover {
+            fill: #ffffff;
+            transform: scale(1.2);
+        }
+
+        .footer-content {
+            margin-top: 15px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Efectos especiales */
+        @keyframes pulse {
+            0% { text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 15px rgba(0, 255, 255, 0.8); }
+            100% { text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); }
+        }
+
+        .pulse-effect {
+            animation: pulse 2s infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-content p {
+                font-size: 1.2rem;
+            }
+            
+            .header {
+                height: 50vh;
+                min-height: 300px;
+            }
+            
+            table {
+                border-spacing: 5px;
+            }
+            
+            .article-card {
+                flex: 0 0 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+            
+            .header-content p {
+                font-size: 1rem;
+            }
+            
+            .header {
+                height: 40vh;
+                min-height: 250px;
+            }
+        }
+        .articles-horizontal-container {
+    max-width: 1200px; /* Ajusta este valor según tu diseño */
+    margin: 0 auto; /* Esto centra el contenedor */
+    padding: 0 20px; /* Añade un poco de padding en los lados */
+}
+
+.articles-horizontal {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #00ffff #0f1923;
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en pantallas pequeñas */
+}
+
+/* Opcional: ajusta el ancho de las tarjetas para que se vean mejor cuando están centradas */
+.article-card {
+    flex: 0 0 280px; /* Ancho fijo para cada tarjeta */
+    /* Resto de tus estilos... */
+}
+
+@media (max-width: 768px) {
+    .articles-horizontal {
+        justify-content: flex-start; /* En móviles, alinea a la izquierda para el scroll */
+    }
+}
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <main class="container">
-        <!-- Encabezado -->
+    <!-- Header que cubre todo el ancho -->
+    <div class="header-container">
         <header class="header">
             <video class="header-video" autoplay muted loop playsinline
                 poster="https://gmedia.playstation.com/is/image/SIEPDC/battlefield-6-hero-desktop-01-en-18jul25-1">
@@ -26,203 +392,163 @@
             <div class="header-overlay"></div>
 
             <div class="header-content">
-                <h1>DB Games</h1>
+                <h1 class="pulse-effect">DB Games</h1>
                 <p>La mejor tienda de video juegos en El Salvador</p>
             </div>
         </header>
+    </div>
 
- <div class="main-content">
-    
-<h1 style="color:azure; text-emphasis: circle; text-align: center;">🎮 Mini Tienda DB Games 🎮</h1>
-    <p  style="text-align: center; color:bisque ;" >Catálogo de videojuegos disponibles</p>
+    <div class="main-container">
+        <div class="main-content">
+            <h1 style="text-align: center;" class="pulse-effect">🎮 Mini Tienda DB Games 🎮</h1>
+            <p style="text-align: center;">Catálogo de videojuegos disponibles</p>
 
-  <hr color="cyan">
+            <hr>
 
-  <table border="0" cellspacing="20" cellpadding="10" align="center">
-    <tr>
+            <table border="0" cellspacing="20" cellpadding="10" align="center">
+                <tr>
+                    <td align="center">
+                        <img src="img/the-witcher.png" width="180"><br>
+                        <b>The Witcher 3</b><br>
+                        <font color="lime">$49.99</font><br>
+                        <button>Comprar</button>
+                    </td>
 
-      <td align="center">
-        <img src="img/the-witcher.png" width="180"><br>
-        <b>The Witcher 3</b><br>
-        <font color="lime">$49.99</font><br>
-        <button>Comprar</button>
-      </td>
+                    <td align="center">
+                        <img src="img/FC26" width="180"><br>
+                        <b>FC 26</b><br>
+                        <font color="lime">$99.99</font><br>
+                        <button>Comprar</button>
+                    </td>
 
-      <td align="center">
-        <img src="img/FC26" width="180"><br>
-        <b>FC 26</b><br>
-        <font color="lime">$99.99</font><br>
-        <button>Comprar</button>
-      </td>
+                    <td align="center">
+                        <img src="img/hogwarts.jpg" width="180"><br>
+                        <b>Hogwarts Legacy</b><br>
+                        <font color="lime">$69.99</font><br>
+                        <button>Comprar</button>
+                    </td>
+                        
+                    <td align="center">
+                        <img src="img/gtav" width="180"><br>
+                        <b>GTA V</b><br>
+                        <font color="lime">$19.99</font><br>
+                        <button>Comprar</button>
+                    </td>
 
-      <td align="center">
-        <img src="img/hogwarts.jpg" width="180"><br>
-        <b>Hogwarts Legacy</b><br>
-        <font color="lime">$69.99</font><br>
-        <button>Comprar</button>
-      </td>
-        
-      <td align="center">
-        <img src="img/gtav" width="180"><br>
-        <b>GTA V</b><br>
-        <font color="lime">$19.99</font><br>
-        <button>Comprar</button>
-      </td>
+                    <td align="center">
+                        <img src="img/assassins" width="180"><br>
+                        <b>Assassin's Creed Mirage</b><br>
+                        <font color="lime">$39.99</font><br>
+                        <button>Comprar</button>
+                    </td>
+                </tr>
+            </table>
+            <hr>
 
-      <td align="center">
-        <img src="img/assassins" width="180"><br>
-        <b>Assassin's Creed Mirage</b><br>
-        <font color="lime">$39.99</font><br>
-        <button>Comprar</button>
-      </td>
-  </table>
-  <hr color="cyan">
-
-            <h2 style="color: azure;">Novedades</h2>
-            <div class="article-container">
-                <div class="horizontal-article">
-                    <a href="./articulo1.html">
-                        <div class="article-image">
-                            <img src="./img/the-witcher.png" alt="">
-                        </div>
-                    </a>
-                    <div class="article-content">
-                        <h2>The Witcher</h2>
-                        <p>Es un videojuego de rol y acción basado en la saga literaria del escritor polaco Andrzej Sapkowski. 
-                            El jugador controla a Geralt de Rivia, un brujo cazador de monstruos que posee habilidades 
-                            sobrenaturales gracias a mutaciones. A lo largo del juego, el jugador debe tomar decisiones morales
-                            que afectan el desarrollo de la historia, enfrentarse a criaturas fantásticas y explorar un mundo 
-                            lleno de política, magia y guerras. Su narrativa madura y sus elecciones con consecuencias lo han 
-                            convertido en uno de los títulos más influyentes del género RPG.</p>
-                    </div>
+            <h2 style="text-align: center;">Novedades</h2>
+<!-- Artículos en disposición horizontal -->
+<div class="articles-horizontal-container">
+    <div class="articles-horizontal">
+        <div class="article-card">
+            <a href="./articulo11.html">
+                <div class="article-image">
+                    <img src="./img/the-witcher.png" alt="The Witcher">
                 </div>
-
-                <div class="horizontal-article">
-                    <div class="article-image">
-                        <img src="./img/fc26.png" alt="">
-                    </div>
-                    <div class="article-content">
-                        <h2>EA Sports FC 26</h2>
-                        <p>s un simulador de fútbol desarrollado por Electronic Arts. Es la evolución de la saga FIFA 
-                            y ofrece una experiencia realista con más de 20,000 jugadores, 750 equipos, 35 ligas y 
-                            competiciones oficiales como la Champions League, Premier League y la Copa Libertadores.
-                            Su objetivo principal es ponerte en la piel de un jugador o entrenador para disputar partidos,
-                            gestionar plantillas y competir a nivel global, tanto en modo local como en línea.</p>
-                    </div>
-                </div>
-                <div class="horizontal-article">
-                    <div class="article-image">
-                        <img src="./img/hogwarts.jpg" alt="">
-                    </div>
-                    <div class="article-content">
-                        <h2>Hogwarts Legacy</h2>
-                        <p>Es un videojuego de rol de acción en mundo abierto ambientado en 
-                            el universo mágico de Harry Potter, aunque situado mucho antes de los eventos de
-                            los libros, específicamente en el siglo XIX (1800s). Fue desarrollado por 
-                            Avalanche Software y publicado por Warner Bros. Games bajo el sello de Portkey 
-                            Games.</p>
-                    </div>
-                </div>
-                <div class="horizontal-article">
-                    <div class="article-image">
-                        <img src="./img/catquest2.webp" alt="">
-                    </div>
-                    <div class="article-content">
-                        <h2>Cat Quest II</h2>
-                        <p> Es un videojuego de rol de acción en 2D con perspectiva cenital, desarrollado 
-                            por The Gentlebros y publicado por PQube. Es la secuela directa de Cat Quest y 
-                            ofrece una aventura ligera, divertida y muy accesible, ideal tanto para 
-                            jugadores casuales como para quienes disfrutan de RPGs con encanto y humor..</p>
-                    </div>
-                </div>
-
-                <div class="horizontal-article">
-                    <div class="article-image">
-                        <img src="./img/mortal.webp" alt="">
-                    </div>
-                    <div class="article-content">
-                        <h2>Mortal Kombat 11 (MK11)</h2>
-                        <p>Es un videojuego de lucha desarrollado por NetherRealm 
-                            Studios y publicado por Warner Bros. Interactive Entertainment. Es la undécima 
-                            entrega principal de la franquicia Mortal Kombat, una de las sagas de juegos 
-                            de pelea más icónicas y violentas de la historia.</p>
-                    </div>
-                </div>
-                <div class="horizontal-article">
-                    <div class="article-image">
-                        <img src="./img/Fortnite.jpeg" alt="">
-                    </div>
-                    <div class="article-content">
-                        <h2>Fortnite</h2>
-                        <p>Es un videojuego en línea desarrollado por Epic Games. Es uno de los 
-                            títulos más populares del mundo gracias a su estilo colorido, jugabilidad 
-                            dinámica y actualizaciones constantes con eventos en vivo. El juego combina 
-                            acción, construcción y supervivencia en diferentes modos, todos con posibilidad 
-                            de jugar en solitario, dúo o escuadra.</p>
-                    </div>
-                </div>
+            </a>
+            <div class="article-content">
+                <h2>The Witcher</h2>
+                <p>Es un videojuego de rol y acción basado en la saga literaria del escritor polaco Andrzej Sapkowski. El jugador controla a Geralt de Rivia, un brujo cazador de monstruos que posee habilidades sobrenaturales gracias a mutaciones.</p>
             </div>
         </div>
-    <h1 style="color: azure; text-align: center;">Productos Más Vendidos</h1>
-    <table class="Ventas" >
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Producto</th>
-                <th>Cantidad Vendida</th>
-                <th>Precio</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>EA Sports FC 26</td>
-                <td>178</td>
-                <td>$99.99</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Fornite</td>
-                <td>139</td>
-                <td>$25.99</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Hogwarts Legacy</td>
-                <td>124</td>
-                <td>$69.99</td>
-            </tr>
-             <tr>
-                <td>4</td>
-                <td>Mortal Kombat 11</td>
-                <td>116</td>
-                <td>$49.99</td>
-            </tr>
-             <tr>
-                <td>5</td>
-                <td>The Witcher</td>
-                <td>105</td>
-                <td>$19.99</td>
-            </tr>
-        </tbody>
-    </table>
-     <br>
-        <!-- PIE DE PÁGINA -->
-        <footer class="footer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-          <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tiktok" viewBox="0 0 16 16">
-         <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
-          <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
-        </svg>
-            <p class="footer-content">© 2025 DB Games|Contacto@DBgames2025.com</p>
-        </footer>
-</body>
 
+        <div class="article-card">
+            <a href="./articulo2.html">
+            <div class="article-image">
+                <img src="./img/fc26.png" alt="EA Sports FC 26">
+            </div>
+            </a>
+            <div class="article-content">
+                <h2>EA Sports FC 26</h2>
+                <p>Es un simulador de fútbol desarrollado por Electronic Arts. Es la evolución de la saga FIFA y ofrece una experiencia realista con más de 20,000 jugadores, 750 equipos y competiciones oficiales.</p>
+            </div>
+        </div>
+
+        <div class="article-card">
+            <a href="./articulo3.html">
+            <div class="article-image">
+                <img src="./img/hogwarts.jpg" alt="Hogwarts Legacy">
+            </div>
+            </a>
+            <div class="article-content">
+                <h2>Hogwarts Legacy</h2>
+                <p>Es un videojuego de rol de acción en mundo abierto ambientado en el universo mágico de Harry Potter, aunque situado mucho antes de los eventos de los libros, específicamente en el siglo XIX (1800s).</p>
+            </div>
+        </div>
+    </div>
+</div>
+          
+            <h1 style="text-align: center;" class="pulse-effect">Productos Más Vendidos</h1>
+            <table class="Ventas">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Producto</th>
+                        <th>Cantidad Vendida</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>EA Sports FC 26</td>
+                        <td>178</td>
+                        <td>$99.99</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Hogwarts Legacy</td>
+                        <td>124</td>
+                        <td>$69.99</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>The Witcher</td>
+                        <td>105</td>
+                        <td>$19.99</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Assassin's Creed Mirage</td>
+                        <td>98</td>
+                        <td>$39.99</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>GTA V</td>
+                        <td>87</td>
+                        <td>$19.99</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            
+            <!-- PIE DE PÁGINA -->
+            <footer class="footer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                    <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tiktok" viewBox="0 0 16 16">
+                    <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+                    <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
+                </svg>
+                <p class="footer-content">© 2025 DB Games | Contacto@DBgames2025.com</p>
+            </footer>
+        </div>
+    </div>
+</body>
 </html>
