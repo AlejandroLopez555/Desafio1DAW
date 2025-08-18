@@ -3,90 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Witcher - Sitio Web</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=MedievalSharp&display=swap" rel="stylesheet">
+    <title>The Witcher - DB Games</title>
     <style>
-        /* ===== Variables y Estilo general ===== */
-        :root {
-            --primary-color: #e63946;
-            --secondary-color: #d4af37;
-            --dark-bg: #0a0a0a;
-            --medium-bg: #1a1a1a;
-            --light-bg: #2a2a2a;
-            --text-primary: #e0d6c3;
-            --text-secondary: #b8b0a0;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            --transition: all 0.3s ease;
-        }
-
+        /* ===== Estilo DB Games ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: "Cinzel", serif;
-            background-color: var(--dark-bg);
-            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f1923;
+            color: #fff;
+            background-image: 
+                linear-gradient(rgba(15, 25, 35, 0.9), rgba(15, 25, 35, 0.9)),
+                url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
             line-height: 1.7;
-            background-image: url('https://www.transparenttextures.com/patterns/black-paper.png');
         }
 
+        h1, h2, h3 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Header DB Games */
+        .header-container {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url("https://cdna.artstation.com/p/assets/images/images/038/374/028/large/daniel-galanty-witcher-3-final.jpg") no-repeat center/cover;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 2;
+        }
+
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 3;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            margin: 0;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.5);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            margin: 10px 0 0;
+            color: #ccc;
+        }
+
+        /* Contenedor principal DB Games */
         .container {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* ===== Header ===== */
-        .header {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url("https://cdna.artstation.com/p/assets/images/images/038/374/028/large/daniel-galanty-witcher-3-final.jpg") no-repeat center/cover;
-            text-align: center;
-            padding: 120px 20px;
-            color: #fff;
-            position: relative;
-            border-bottom: 3px solid var(--primary-color);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-            animation: fadeIn 1.5s ease;
-        }
-
-        .header h1 {
-            font-size: 4.5rem;
-            color: var(--primary-color);
-            text-shadow: 0 0 15px #000, 2px 2px 4px rgba(0, 0, 0, 0.8);
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
-            font-weight: 900;
-        }
-
-        .header p {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            font-family: 'MedievalSharp', cursive;
-            text-shadow: 0 0 10px #000;
-            margin-bottom: 2rem;
-        }
-
-        .header::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, transparent 50%, rgba(0, 0, 0, 0.9) 100%);
-        }
-
-        /* ===== Layout ===== */
         .main-layout {
             display: flex;
             flex: 1;
@@ -97,36 +101,34 @@
             width: 100%;
         }
 
-        /* ===== Artículo principal ===== */
+        /* Artículo principal con estilo DB Games */
         .main-article {
             flex: 2;
-            background: var(--medium-bg);
-            border: 2px solid var(--primary-color);
-            border-radius: var(--border-radius);
+            background: rgba(20, 30, 40, 0.7);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
             overflow: hidden;
-            transition: var(--transition);
-            cursor: pointer;
-            box-shadow: var(--box-shadow);
-            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .main-article:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.6);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.5);
         }
 
         .article-header {
-            background: linear-gradient(to right, var(--primary-color), #c1121f);
+            background: linear-gradient(to right, rgba(0, 150, 200, 0.3), rgba(0, 100, 150, 0.3));
             padding: 20px;
             text-align: center;
-            border-bottom: 2px solid var(--secondary-color);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         .article-title {
             font-size: 2.2rem;
-            color: #fff;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-            letter-spacing: 1px;
+            color: #00ffff;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
         }
 
         .article-content {
@@ -144,28 +146,18 @@
             height: auto;
             display: block;
             transition: transform 0.5s ease;
+            border-radius: 0;
         }
 
         .main-article:hover .article-image img {
             transform: scale(1.05);
         }
 
-        .article-image::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(to top, rgba(26, 26, 26, 0.9), transparent);
-        }
-
         .article-text {
             padding: 25px;
-            color: var(--text-secondary);
+            color: #ccc;
             font-size: 1.1rem;
-            background: var(--medium-bg);
-            position: relative;
+            background: transparent;
         }
 
         .article-text p {
@@ -173,17 +165,7 @@
             text-align: justify;
         }
 
-        .article-text::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 20px;
-            right: 20px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
-        }
-
-        /* ===== Sidebar ===== */
+        /* Sidebar con estilo DB Games */
         .sidebar {
             flex: 1;
             display: flex;
@@ -193,31 +175,28 @@
         }
 
         .sidebar-article {
-            background: var(--medium-bg);
-            border: 1px solid #444;
-            border-left: 5px solid var(--primary-color);
-            border-radius: var(--border-radius);
+            background: rgba(20, 30, 40, 0.7);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
             overflow: hidden;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .sidebar-article:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(230, 57, 70, 0.5);
-            border-left-color: var(--secondary-color);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.5);
         }
 
         .sidebar-header {
-            background: linear-gradient(to right, #333, #222);
-            color: #fff;
+            background: linear-gradient(to right, rgba(0, 150, 200, 0.3), rgba(0, 100, 150, 0.3));
+            color: #00ffff;
             padding: 15px;
             font-weight: bold;
             text-align: center;
             font-size: 1.2rem;
-            letter-spacing: 1px;
-            border-bottom: 1px solid #444;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         .sidebar-image {
@@ -234,86 +213,55 @@
             transform: scale(1.1);
         }
 
-        /* Botón */
+        /* Botón DB Games */
         .btn {
-            background: linear-gradient(to right, var(--primary-color), #c1121f);
-            color: #fff;
+            background: linear-gradient(45deg, #00ffff, #0088ff);
             border: none;
+            color: #0f1923;
             padding: 12px 25px;
-            border-radius: var(--border-radius);
-            font-weight: bold;
+            border-radius: 20px;
             cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Cinzel', serif;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            display: inline-block;
+            font-weight: bold;
+            transition: all 0.3s ease;
             text-decoration: none;
+            display: inline-block;
             text-align: center;
         }
 
         .btn:hover {
-            background: linear-gradient(to right, #c1121f, var(--primary-color));
+            background: linear-gradient(45deg, #0088ff, #00ffff);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(230, 57, 70, 0.4);
         }
 
-        .btn-secondary {
-            background: linear-gradient(to right, #333, #222);
-        }
-
-        .btn-secondary:hover {
-            background: linear-gradient(to right, #222, #333);
-        }
-
-        /* ===== Footer ===== */
+        /* Footer DB Games */
         .footer {
-            background: linear-gradient(to right, #111, #000);
+            background: rgba(10, 20, 30, 0.9);
+            padding: 30px 0;
             text-align: center;
-            padding: 25px;
-            border-top: 2px solid var(--primary-color);
-            margin-top: 30px;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+            margin-top: 50px;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         .footer-content {
-            color: var(--text-secondary);
+            color: #aaa;
             font-size: 0.9rem;
             max-width: 800px;
             margin: 0 auto;
-            line-height: 1.6;
         }
 
-        /* ===== Animaciones ===== */
+        /* Efectos especiales DB Games */
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
+            0% { text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 15px rgba(0, 255, 255, 0.8); }
+            100% { text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .pulse-effect {
+            animation: pulse 2s infinite;
         }
 
-        /* ===== Efectos especiales ===== */
-        .medallion {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background-image: url('https://www.pngkit.com/png/full/127-1278422_wolf-head-wolf-medallion-the-witcher.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            filter: drop-shadow(0 0 5px rgba(230, 57, 70, 0.7));
-            opacity: 0.8;
-            z-index: 2;
-        }
-
-        /* ===== Responsive ===== */
+        /* Responsive */
         @media (max-width: 1024px) {
             .main-layout {
                 flex-direction: column;
@@ -321,7 +269,7 @@
             }
             
             .header h1 {
-                font-size: 3.5rem;
+                font-size: 3rem;
             }
             
             .header p {
@@ -340,7 +288,8 @@
 
         @media (max-width: 768px) {
             .header {
-                padding: 80px 20px;
+                height: 50vh;
+                min-height: 300px;
             }
             
             .header h1 {
@@ -356,36 +305,31 @@
             }
         }
 
-        /* ===== Efecto de pergamino ===== */
-        .scroll-effect {
-            position: relative;
-        }
-
-        .scroll-effect::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
-            opacity: 0.05;
-            pointer-events: none;
+        @media (max-width: 480px) {
+            .header {
+                height: 40vh;
+                min-height: 250px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container scroll-effect">
-        <!-- Medallón del Lobo -->
-        <div class="medallion"></div>
-
-        <!-- Encabezado -->
-        <header class="header">
-            <div class="header-content">
-                <h1>The Witcher</h1>
-                <p>"La espada del destino tiene dos filos... y tú acabas de agarrarla por la hoja"</p>
-            </div>
-        </header>
+    <div class="container">
+        <!-- Header DB Games -->
+        <div class="header-container">
+            <header class="header">
+                <div class="header-overlay"></div>
+                <div class="header-content">
+                    <h1 class="pulse-effect">The Witcher</h1>
+                    <p>"La espada del destino tiene dos filos... y tú acabas de agarrarla por la hoja"</p>
+                </div>
+            </header>
+        </div>
 
         <!-- Layout principal -->
         <div class="main-layout">
@@ -447,7 +391,7 @@ Andrzej Sapkowski vendió los derechos de la saga de Geralt de Rivia a CD Projek
                             <img src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2018/01/witcher-3-personajes-principales.jpg?tf=3840x" alt="Yennefer, Geralt y Ciri" />
                         </div>
                         <div style="padding: 15px;">
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                            <p style="color: #ccc; font-size: 0.9rem; text-align: center;">
                                 Geralt, Yennefer, Ciri, Triss y otros personajes clave del universo.
                             </p>
                         </div>
@@ -463,7 +407,7 @@ Andrzej Sapkowski vendió los derechos de la saga de Geralt de Rivia a CD Projek
                             <img src="https://assetsio.gnwcdn.com/vejam-o-mapa-completo-de-the-witcher-3-wild-hunt-1428065295262.jpg?width=1200&height=900&fit=crop&quality=100&format=png&enable=upscale&auto=webp" alt="Mapa del continente en The Witcher" />
                         </div>
                         <div style="padding: 15px;">
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                            <p style="color: #ccc; font-size: 0.9rem; text-align: center;">
                                 Descubre los reinos del Norte, Nilfgaard y las tierras salvajes.
                             </p>
                         </div>
@@ -479,7 +423,7 @@ Andrzej Sapkowski vendió los derechos de la saga de Geralt de Rivia a CD Projek
                             <img src="https://www.thewitcher.com/_next/image?url=https%3A%2F%2Fstatic.cdprojektred.com%2Fcms.cdprojektred.com%2F16x9_big%2Ff25047dc5904d50535f4dd92235e20281bea1f1a-1920x1080.jpg&w=1920&q=75" alt="Escuela del Lobo" />
                         </div>
                         <div style="padding: 15px;">
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                            <p style="color: #ccc; font-size: 0.9rem; text-align: center;">
                                 Las diferentes escuelas que entrenan a los cazadores de monstruos.
                             </p>
                         </div>
@@ -491,9 +435,9 @@ Andrzej Sapkowski vendió los derechos de la saga de Geralt de Rivia a CD Projek
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-content">
-                © 2025 - Sitio sobre The Witcher | Inspirado en el universo de Andrzej Sapkowski<br>
+                © 2025 DB Games | The Witcher - Sitio no oficial<br>
                 <small style="color: #666; margin-top: 10px; display: block;">
-                    Este es un sitio fan-made no afiliado a CD Projekt Red
+                    Contenido basado en el universo de Andrzej Sapkowski
                 </small>
             </div>
         </footer>
@@ -507,7 +451,7 @@ Andrzej Sapkowski vendió los derechos de la saga de Geralt de Rivia a CD Projek
                 article.style.zIndex = '';
             });
 
-            element.style.transform = 'scale(1.02)';
+            element.style.transform = 'translateY(-10px)';
             element.style.zIndex = '10';
             
             element.style.animation = 'none';
@@ -522,15 +466,6 @@ Andrzej Sapkowski vendió los derechos de la saga de Geralt de Rivia a CD Projek
                 alert(`Más información sobre: ${title}`);
             }, 300);
         }
-        
-        // Efecto de medallón que reacciona al movimiento del mouse
-        document.addEventListener('mousemove', function(e) {
-            const medallion = document.querySelector('.medallion');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            medallion.style.transform = `translate(${x * 10 - 5}px, ${y * 10 - 5}px)`;
-        });
     </script>
 </body>
 </html>
