@@ -3,136 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hogwarts Legacy - Tu Aventura Mágica</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=MedievalSharp&display=swap" rel="stylesheet">
+    <title>Hogwarts Legacy - DB Games</title>
     <style>
-        /* ===== Variables y Estilo general ===== */
-        :root {
-            --hogwarts-blue: #222f5b;
-            --hogwarts-gold: #d4af37;
-            --hogwarts-red: #7f0909;
-            --hogwarts-green: #2a623d;
-            --parchment: #f5f0e5;
-            --ink: #3a3226;
-            --dark-wood: #5a4a3a;
-            --light-wood: #8b7d6b;
-            --text-primary: #3a3226;
-            --text-secondary: #5a4a3a;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            --transition: all 0.3s ease;
-        }
-
+        /* ===== Estilo DB Games ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: "Cormorant Garamond", serif;
-            color: var(--ink);
-            line-height: 1.7;
-            background-image: url('https://4kwallpapers.com/images/wallpapers/hogwarts-legacy-winter-2560x1440-20034.jpeg');
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f1923;
+            color: #fff;
+            background-image: 
+                linear-gradient(rgba(15, 25, 35, 0.9), rgba(15, 25, 35, 0.9)),
+                url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
-            background-position: center;
             background-attachment: fixed;
+            background-position: center;
+            line-height: 1.7;
         }
 
+        h1, h2, h3 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Header DB Games */
+        .header-container {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url("https://4kwallpapers.com/images/wallpapers/hogwarts-legacy-winter-3840x2160-20034.jpeg") no-repeat center/cover;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 2;
+        }
+
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 3;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            margin: 0;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.5);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            margin: 10px 0 0;
+            color: #ccc;
+        }
+
+        /* Contenedor principal DB Games */
         .container {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: var(--box-shadow);
-            border-radius: var(--border-radius);
-            overflow: hidden;
         }
 
-        /* ===== Header ===== */
-        .header {
-            background: linear-gradient(rgba(34, 47, 91, 0.8), rgba(34, 47, 91, 0.8)), 
-                        url('https://4kwallpapers.com/images/wallpapers/hogwarts-legacy-winter-3840x2160-20034.jpeg') no-repeat center/cover;
-            text-align: center;
-            padding: 100px 20px;
-            color: #fff;
-            position: relative;
-            border-bottom: 5px solid var(--hogwarts-gold);
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-            animation: fadeIn 1.5s ease;
-        }
-
-        .header h1 {
-            font-size: 3.5rem;
-            color: var(--hogwarts-gold);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
-            font-weight: 700;
-        }
-
-        .header p {
-            font-size: 1.3rem;
-            color: #fff;
-            font-family: 'MedievalSharp', cursive;
-            margin-bottom: 2rem;
-        }
-
-        .header::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(34, 47, 91, 0.9) 0%, transparent 50%, rgba(34, 47, 91, 0.9) 100%);
-        }
-
-        /* ===== Layout ===== */
         .main-layout {
             display: flex;
             flex: 1;
             padding: 30px;
             gap: 30px;
-            background-color: rgba(255, 255, 255, 0.9);
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
         }
 
-        /* ===== Artículo principal ===== */
+        /* Artículo principal con estilo DB Games */
         .main-article {
             flex: 2;
-            background: white;
-            border: 1px solid var(--light-wood);
-            border-radius: var(--border-radius);
+            background: rgba(20, 30, 40, 0.7);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
             overflow: hidden;
-            transition: var(--transition);
-            box-shadow: var(--box-shadow);
-            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .main-article:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.5);
         }
 
         .article-header {
-            background: var(--hogwarts-blue);
+            background: linear-gradient(to right, rgba(0, 150, 200, 0.3), rgba(0, 100, 150, 0.3));
             padding: 20px;
             text-align: center;
-            border-bottom: 3px solid var(--hogwarts-gold);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         .article-title {
-            font-size: 2rem;
-            color: var(--hogwarts-gold);
-            letter-spacing: 1px;
-            font-weight: 600;
+            font-size: 2.2rem;
+            color: #00ffff;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
         }
 
         .article-content {
@@ -150,18 +146,18 @@
             height: auto;
             display: block;
             transition: transform 0.5s ease;
+            border-radius: 0;
         }
 
         .main-article:hover .article-image img {
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
 
         .article-text {
             padding: 25px;
-            color: var(--text-primary);
+            color: #ccc;
             font-size: 1.1rem;
-            background: white;
-            position: relative;
+            background: transparent;
         }
 
         .article-text p {
@@ -169,17 +165,7 @@
             text-align: justify;
         }
 
-        .article-text::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 20px;
-            right: 20px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--hogwarts-gold), transparent);
-        }
-
-        /* ===== Sidebar ===== */
+        /* Sidebar con estilo DB Games */
         .sidebar {
             flex: 1;
             display: flex;
@@ -189,28 +175,28 @@
         }
 
         .sidebar-article {
-            background: white;
-            border: 1px solid var(--light-wood);
-            border-radius: var(--border-radius);
+            background: rgba(20, 30, 40, 0.7);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
             overflow: hidden;
-            transition: var(--transition);
-            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .sidebar-article:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.5);
         }
 
         .sidebar-header {
-            background: var(--hogwarts-blue);
-            color: var(--hogwarts-gold);
+            background: linear-gradient(to right, rgba(0, 150, 200, 0.3), rgba(0, 100, 150, 0.3));
+            color: #00ffff;
             padding: 15px;
-            font-weight: 600;
+            font-weight: bold;
             text-align: center;
             font-size: 1.2rem;
-            letter-spacing: 1px;
-            border-bottom: 2px solid var(--hogwarts-gold);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         .sidebar-image {
@@ -224,69 +210,108 @@
         }
 
         .sidebar-article:hover .sidebar-image img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
-        .sidebar-content {
-            padding: 15px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* Botón */
+        /* Botón DB Games */
         .btn {
-            background: var(--hogwarts-blue);
-            color: var(--hogwarts-gold);
-            border: 1px solid var(--hogwarts-gold);
-            padding: 10px 20px;
-            border-radius: var(--border-radius);
-            font-weight: 600;
+            background: linear-gradient(45deg, #00ffff, #0088ff);
+            border: none;
+            color: #0f1923;
+            padding: 12px 25px;
+            border-radius: 20px;
             cursor: pointer;
-            transition: var(--transition);
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-            box-shadow: var(--box-shadow);
-            display: inline-block;
+            font-weight: bold;
+            transition: all 0.3s ease;
             text-decoration: none;
+            display: inline-block;
             text-align: center;
-            font-family: "Cormorant Garamond", serif;
         }
 
         .btn:hover {
-            background: var(--hogwarts-gold);
-            color: var(--hogwarts-blue);
+            background: linear-gradient(45deg, #0088ff, #00ffff);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
             transform: translateY(-2px);
         }
 
-        /* ===== Footer ===== */
+        /* Footer DB Games */
         .footer {
-            background: var(--hogwarts-blue);
+            background: rgba(10, 20, 30, 0.9);
+            padding: 30px 0;
             text-align: center;
-            padding: 25px;
-            border-top: 5px solid var(--hogwarts-gold);
-            color: var(--hogwarts-gold);
+            margin-top: 50px;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         .footer-content {
+            color: #aaa;
             font-size: 0.9rem;
             max-width: 800px;
             margin: 0 auto;
-            line-height: 1.6;
         }
 
-        /* ===== Animaciones ===== */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Efectos especiales DB Games */
+        @keyframes pulse {
+            0% { text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 15px rgba(0, 255, 255, 0.8); }
+            100% { text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); }
         }
 
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0px); }
+        .pulse-effect {
+            animation: pulse 2s infinite;
         }
 
-        /* ===== Elementos temáticos ===== */
+        /* Elementos temáticos adaptados */
+        .house-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .house-tab {
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            border: 1px solid transparent;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .house-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        .gryffindor-tab {
+            background: linear-gradient(45deg, #7f0909, #ff0000);
+            color: #ffcc00;
+            border-color: #ffcc00;
+        }
+
+        .slytherin-tab {
+            background: linear-gradient(45deg, #2a623d, #00aa00);
+            color: #cccccc;
+            border-color: #cccccc;
+        }
+
+        .ravenclaw-tab {
+            background: linear-gradient(45deg, #222f5b, #0066cc);
+            color: #00ffff;
+            border-color: #00ffff;
+        }
+
+        .hufflepuff-tab {
+            background: linear-gradient(45deg, #d4af37, #ffcc00);
+            color: #000000;
+            border-color: #000000;
+        }
+
         .hogwarts-badge {
             position: absolute;
             top: 20px;
@@ -296,56 +321,53 @@
             background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/9eb92786-5e60-46ac-ae2c-d33af137f691/deygeis-eb2bfc22-d9d6-47f5-b715-30c30caaaa66.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzllYjkyNzg2LTVlNjAtNDZhYy1hZTJjLWQzM2FmMTM3ZjY5MVwvZGV5Z2Vpcy1lYjJiZmMyMi1kOWQ2LTQ3ZjUtYjcxNS0zMGMzMGNhYWFhNjYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.TQRAV0UaWXt_iLaRvs4QDsrCORLjoWJt7EKpL1Biz6Q');
             background-size: contain;
             background-repeat: no-repeat;
-            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
+            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.7));
             opacity: 0.9;
-            z-index: 2;
+            z-index: 4;
             animation: floating 3s ease-in-out infinite;
         }
 
-        .house-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .quote {
+            font-style: italic;
+            color: #00ffff;
+            border-left: 3px solid rgba(0, 255, 255, 0.5);
+            padding-left: 15px;
             margin: 20px 0;
+            font-size: 1.1rem;
+            background-color: rgba(0, 150, 200, 0.1);
+            padding: 10px 15px;
+            border-radius: 0 10px 10px 0;
         }
 
-        .house-tab {
-            padding: 8px 15px;
-            border-radius: 20px;
+        .spell-list {
+            list-style-type: none;
+            margin: 15px 0;
+        }
+
+        .spell-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(0, 255, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .spell-name {
             font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #00ffff;
         }
 
-        .gryffindor-tab {
-            background-color: var(--hogwarts-red);
-            color: var(--hogwarts-gold);
+        .spell-effect {
+            color: #aaa;
+            font-size: 0.9rem;
         }
 
-        .slytherin-tab {
-            background-color: var(--hogwarts-green);
-            color: white;
-        }
-
-        .ravenclaw-tab {
-            background-color: var(--hogwarts-blue);
-            color: var(--hogwarts-gold);
-        }
-
-        .hufflepuff-tab {
-            background-color: var(--hogwarts-gold);
-            color: var(--hogwarts-blue);
-        }
-
-        .house-tab:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* ===== Responsive ===== */
+        /* Responsive */
         @media (max-width: 1024px) {
             .main-layout {
                 flex-direction: column;
@@ -353,11 +375,11 @@
             }
             
             .header h1 {
-                font-size: 2.8rem;
+                font-size: 3rem;
             }
             
             .header p {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             .sidebar {
@@ -372,86 +394,60 @@
 
         @media (max-width: 768px) {
             .header {
-                padding: 70px 20px;
+                height: 50vh;
+                min-height: 300px;
             }
             
             .header h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .article-title {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
             
             .sidebar {
                 flex-direction: column;
             }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                height: 40vh;
+                min-height: 250px;
+            }
             
-            .house-tabs {
-                flex-wrap: wrap;
+            .header h1 {
+                font-size: 2rem;
             }
         }
-
-        /* Estilo para citas */
-        .quote {
-            font-style: italic;
-            color: var(--hogwarts-blue);
-            border-left: 3px solid var(--hogwarts-gold);
-            padding-left: 15px;
-            margin: 20px 0;
-            font-size: 1.1rem;
-            background-color: rgba(212, 175, 55, 0.1);
-            padding: 10px 15px;
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
-        }
-
-        /* Estilo para listas */
-        .spell-list {
-            list-style-type: none;
-            margin: 15px 0;
-        }
-
-        .spell-list li {
-            padding: 8px 0;
-            border-bottom: 1px dashed var(--light-wood);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .spell-name {
-            font-weight: 600;
-            color: var(--hogwarts-blue);
-        }
-
-        .spell-effect {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <!-- Escudo de Hogwarts -->
-        <div class="hogwarts-badge"></div>
-
-        <!-- Encabezado -->
-        <header class="header">
-            <div class="header-content">
-                <h1>Hogwarts Legacy</h1>
-                <p>"Forja tu propio legado en el mundo mágico"</p>
-                <div class="house-tabs">
-                    <div class="house-tab gryffindor-tab">Gryffindor</div>
-                    <div class="house-tab slytherin-tab">Slytherin</div>
-                    <div class="house-tab ravenclaw-tab">Ravenclaw</div>
-                    <div class="house-tab hufflepuff-tab">Hufflepuff</div>
+        <!-- Header DB Games -->
+        <div class="header-container">
+            <header class="header">
+                <div class="hogwarts-badge"></div>
+                <div class="header-overlay"></div>
+                <div class="header-content">
+                    <h1 class="pulse-effect">Hogwarts Legacy</h1>
+                    <p>"Forja tu propio legado en el mundo mágico"</p>
+                    <div class="house-tabs">
+                        <div class="house-tab gryffindor-tab">Gryffindor</div>
+                        <div class="house-tab slytherin-tab">Slytherin</div>
+                        <div class="house-tab ravenclaw-tab">Ravenclaw</div>
+                        <div class="house-tab hufflepuff-tab">Hufflepuff</div>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        </div>
 
         <!-- Layout principal -->
         <div class="main-layout">
             <!-- Artículo principal -->
-            <article class="main-article">
+            <article class="main-article" onclick="expandArticle(this)">
                 <div class="article-header">
                     <h2 class="article-title">Bienvenido a Hogwarts</h2>
                 </div>
@@ -476,7 +472,7 @@
                             Haz aliados, lucha contra magos tenebrosos y decide el destino de la comunidad mágica.
                         </p>
                         
-                        <h3 style="color: var(--hogwarts-blue); margin: 20px 0 10px 0;">Hechizos esenciales</h3>
+                        <h3>Hechizos esenciales</h3>
                         <ul class="spell-list">
                             <li><span class="spell-name">Lumos</span> <span class="spell-effect">- Ilumina tu camino</span></li>
                             <li><span class="spell-name">Wingardium Leviosa</span> <span class="spell-effect">- Levita objetos</span></li>
@@ -508,7 +504,7 @@
                     </div>
                 </article>
 
-                <article class="sidebar-article">
+                <article class="sidebar-article" onclick="expandArticle(this)">
                     <div class="sidebar-header">
                         Clases Mágicas
                     </div>
@@ -517,14 +513,14 @@
                             <img src="https://i0.wp.com/fronterasdefantasia.com/wp-content/uploads/2024/05/Diapositiva30.jpg?resize=1024%2C576&ssl=1" alt="Clases en Hogwarts" />
                         </div>
                         <div style="padding: 15px;">
-                                                        <p style="color: var(--text-secondary); font-size: 0.95rem; text-align: center;">
+                            <p style="color: #ccc; font-size: 0.9rem; text-align: center;">
                                 Asiste a clases de Defensa Contra las Artes Oscuras, Pociones, Herbología y más para dominar la magia.
                             </p>
                         </div>
                     </div>
                 </article>
 
-                <article class="sidebar-article">
+                <article class="sidebar-article" onclick="expandArticle(this)">
                     <div class="sidebar-header">
                         Criaturas Mágicas
                     </div>
@@ -533,14 +529,14 @@
                             <img src="https://erikstore.com/blog/wp-content/uploads/2025/01/BannerBlog_CRIATURAS_HARRY_POTTER.jpg" alt="Criaturas mágicas" />
                         </div>
                         <div style="padding: 15px;">
-                            <p style="color: var(--text-secondary); font-size: 0.95rem; text-align: center;">
+                            <p style="color: #ccc; font-size: 0.9rem; text-align: center;">
                                 Rescata y cuida de hipogrifos, thestrals y otras bestias mágicas en el Vivarium.
                             </p>
                         </div>
                     </div>
                 </article>
 
-                <article class="sidebar-article">
+                <article class="sidebar-article" onclick="expandArticle(this)">
                     <div class="sidebar-header">
                         Explora el Mundo
                     </div>
@@ -549,7 +545,7 @@
                             <img src="https://i.ytimg.com/vi/EYbrCBHIx2o/maxresdefault.jpg" alt="Mapa del juego" />
                         </div>
                         <div style="padding: 15px;">
-                            <p style="color: var(--text-secondary); font-size: 0.95rem; text-align: center;">
+                            <p style="color: #ccc; font-size: 0.9rem; text-align: center;">
                                 Descubre secretos en Hogwarts, Hogsmeade y los territorios circundantes.
                             </p>
                         </div>
@@ -561,15 +557,34 @@
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-content">
-                © 2025 - Hogwarts Legacy Fan Site | Mundo mágico basado en los trabajos de J.K. Rowling<br>
-                <small style="color: rgba(212, 175, 55, 0.8); margin-top: 10px; display: block;">
-                    Este sitio no está afiliado a Warner Bros. Interactive Entertainment o Portkey Games
+                © 2025 DB Games | Hogwarts Legacy - Sitio no oficial<br>
+                <small style="color: #666; margin-top: 10px; display: block;">
+                    Mundo mágico basado en los trabajos de J.K. Rowling
                 </small>
             </div>
         </footer>
     </div>
 
     <script>
+        function expandArticle(element) {
+            const allArticles = document.querySelectorAll('.main-article, .sidebar-article');
+            allArticles.forEach(article => {
+                article.style.transform = '';
+                article.style.zIndex = '';
+            });
+
+            element.style.transform = 'translateY(-10px)';
+            element.style.zIndex = '10';
+            
+            element.style.animation = 'none';
+            setTimeout(() => {
+                element.style.animation = 'pulse 0.6s ease';
+            }, 10);
+
+            const title = element.querySelector('.article-title, .sidebar-header').textContent;
+            console.log(`Artículo clickeado: ${title}`);
+        }
+
         // Animación para las pestañas de casas
         document.querySelectorAll('.house-tab').forEach(tab => {
             tab.addEventListener('click', function() {
